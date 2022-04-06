@@ -34,8 +34,7 @@ Enjoy! thank you.
  - [x]  Add react-navigation
  - [x]  Add Game Screen
  - [x]  Add ScoreSheet Screen
- - [ ]  Add Splash Screen
- - [ ]  Add a state provider
+ - [x]  Wrap with a state provider
  - [ ]  Add Game Screen UI
  - [ ]  Add Game Screen animation
  - [ ]  Add Game Screen logic
@@ -44,3 +43,5 @@ Enjoy! thank you.
  - [ ]  Add alert popup
  - [ ]  Add useForm hook
  - [ ]  Save Game Score 
+ - [ ]  Add theme switch accessibility
+ - [ ]  Add Splash Screen
