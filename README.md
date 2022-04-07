@@ -2,7 +2,7 @@
 
 ## Description:
 
-Simon Says Game with React Native. 
+Simon Says Game with React Native and Redux. 
 
 ### Installation:
 
@@ -35,13 +35,17 @@ Enjoy! thank you.
  - [x]  Add Game Screen
  - [x]  Add ScoreSheet Screen
  - [x]  Wrap with a state provider
- - [ ]  Add Game Screen UI
+ - [x]  Add Game Screen Buttons
  - [ ]  Add Game Screen animation
+ - [ ]  Add Game Screen Sounds
  - [ ]  Add Game Screen logic
  - [ ]  Add ScoreSheet Screen UI
  - [ ]  Add ScoreSheet Screen logic
- - [ ]  Add alert popup
- - [ ]  Add useForm hook
+ - [ ]  Add dynamic GameOver modal UI 
+ - [ ]  Add dynamic GameOver modal logic
+ - [ ]  Add dynamic alert popup
+ - [ ]  Add dynamic hooks
  - [ ]  Save Game Score 
  - [ ]  Add theme switch accessibility
+ - [ ]  Enhance bottom tab navigation
  - [ ]  Add Splash Screen

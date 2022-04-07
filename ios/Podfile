@@ -14,6 +14,8 @@ target 'KastiSays' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNSound', :path => '../node_modules/react-native-sound'
+
   target 'KastiSaysTests' do
     inherit! :complete
     # Pods for testing

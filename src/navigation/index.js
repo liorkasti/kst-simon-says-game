@@ -3,13 +3,12 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import GamePlayScreen from './src/screens/gamePlayScreen';
-import ScoreSheetScreen from './src/screens/scoreSheetScreen';
+import GamePlayScreen from '../screens/gamePlayScreen';
+import ScoreSheetScreen from '../screens/scoreSheetScreen';
 
 const App = () => {
 
   const Tab = createMaterialBottomTabNavigator();
-
   return (
     <NavigationContainer>
       <Tab.Navigator>
