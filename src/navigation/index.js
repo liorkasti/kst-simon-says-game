@@ -17,14 +17,10 @@ const App = () => {
           component={GamePlayScreen}
           options={{
             tabBarLabel: "Game",
-            tabBarColor: '#1f65ff',
-            tabBarIcon: () => {
-              return (
-                <Icon
-                  name="gamepad-circle"
-                />
-              );
-            },
+            tabBarColor: '#f8f9f9',
+            tabBarIcon: ({ color }) => (
+              <Icon name="gamepad-circle" color={color} size={20} />
+            ),
           }}
         />
         <Tab.Screen
@@ -33,13 +29,9 @@ const App = () => {
           options={{
             tabBarLabel: 'ScoreBoard',
             tabBarColor: '#694fad',
-            tabBarIcon: () => {
-              return (
-                <Icon
-                  name="scoreboard"
-                />
-              );
-            },
+            tabBarIcon: ({ color }) => (
+              <Icon name="scoreboard" color={color} size={20} />
+            ),
           }}
         />
       </Tab.Navigator>

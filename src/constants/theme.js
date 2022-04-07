@@ -39,7 +39,7 @@ export const SEQUENCE_BTN = {
   borderTopLeftRadius: SEQUENCE_BTN_SIZE,
 };
 
-export const BOARD = {
+export const BOARD_THEME = {
   width: SEQUENCE_BTN_SIZE,
   height: SEQUENCE_BTN_SIZE,
 };

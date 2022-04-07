@@ -1,7 +1,9 @@
-import React, {useState, } from 'react'
+import React, { useState, } from 'react'
 import { BackHandler, I18nManager, StyleSheet, View } from 'react-native';
+import PlayButton from '../components/PlayButton';
 import SeqButton from './SeqButton';
 import { BUTTON_THEME } from '../constants/theme';
+import { BOARS_SOUNDS } from '../constants/sounds';
 
 const BoardStack = ({ navigation }) => {
     const [active, setActive] = useState(false); // state var to disable buttons when not playing or computer sequence is playing
@@ -9,32 +11,42 @@ const BoardStack = ({ navigation }) => {
     const isRtl = I18nManager.isRTL;
 
     return (
-        <View style={styles.buttonsContainer}>
-            <View style={styles.row}>
-                <SeqButton
-                    btnColor={BUTTON_THEME.green}
-                    direction={'0deg'}
-                    active={!active}
-                />
-                <SeqButton
-                    btnColor={BUTTON_THEME.red}
-                    direction={isRtl ? '270deg' : '90deg'}
-                    active={!active}
-                />
-            </View>
-            <View style={styles.row}>
-                <SeqButton
-                    btnColor={BUTTON_THEME.blue}
-                    direction={isRtl ? '90deg' : '270deg'}
-                    active={!active}
+        <View style={styles.mainContainer}>
+            <View style={styles.buttonsContainer}>
+                <View style={styles.row}>
+                    <SeqButton
+                        btnColor={BUTTON_THEME.green}
+                        direction={'0deg'}
+                        active={!active}
+                        sound={BOARS_SOUNDS[0]}
+                    />
+                    <SeqButton
+                        btnColor={BUTTON_THEME.red}
+                        direction={isRtl ? '270deg' : '90deg'}
+                        active={!active}
+                        sound={BOARS_SOUNDS[1]}
+                    />
+                </View>
+                <View style={styles.row}>
+                    <SeqButton
+                        btnColor={BUTTON_THEME.blue}
+                        direction={isRtl ? '90deg' : '270deg'}
+                        active={!active}
+                        sound={BOARS_SOUNDS[2]}
+                    />
+                    <SeqButton
+                        btnColor={BUTTON_THEME.yellow}
+                        direction={'180deg'}
+                        active={!active}
+                        sound={BOARS_SOUNDS[3]}
+                    />
+                </View>
 
-                />
-                <SeqButton
-                    btnColor={BUTTON_THEME.yellow}
-                    direction={'180deg'}
-                    active={!active}
-                />
             </View>
+            <PlayButton
+                active={!active}
+                sound={BOARS_SOUNDS}
+            />
         </View>
     )
 }

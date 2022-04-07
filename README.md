@@ -36,8 +36,8 @@ Enjoy! thank you.
  - [x]  Add ScoreSheet Screen
  - [x]  Wrap with a state provider
  - [x]  Add Game Screen Buttons
+ - [x]  Add Game Screen Sounds
  - [ ]  Add Game Screen animation
- - [ ]  Add Game Screen Sounds
  - [ ]  Add Game Screen logic
  - [ ]  Add ScoreSheet Screen UI
  - [ ]  Add ScoreSheet Screen logic
