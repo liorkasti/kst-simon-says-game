@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Orientation from 'react-native-orientation-locker';
 
 import GamePlayScreen from '../screens/gamePlayScreen';
 import ScoreSheetScreen from '../screens/scoreSheetScreen';
 
 const App = () => {
+  useEffect(() => {
+    setTimeout(() => { Orientation.lockToPortrait(); });
+  });
 
   const Tab = createMaterialBottomTabNavigator();
   return (

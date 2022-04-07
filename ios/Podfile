@@ -16,6 +16,8 @@ target 'KastiSays' do
 
   pod 'RNSound', :path => '../node_modules/react-native-sound'
 
+  pod 'react-native-orientation-locker', :path => '../node_modules/react-native-orientation-locker'
+
   target 'KastiSaysTests' do
     inherit! :complete
     # Pods for testing
