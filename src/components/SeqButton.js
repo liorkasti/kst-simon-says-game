@@ -1,23 +1,45 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import React, { useRef } from 'react';
+import { StyleSheet, View, Animated, Pressable } from 'react-native';
 import { BOARD_THEME, SEQUENCE_BTN } from '../constants/theme';
 
-import { useSelector } from 'react-redux';
+const SeqButton = ({ direction, btnColor, onPress, active, sound, ref }) => {
 
-const SeqButton = ({ direction, btnColor, onPress, active, sound }) => {
+  const animEffect = useRef(new Animated.Value(1)).current;
+  const animDuration = 25;
 
+  const animIn = () => {
+    sound.play();
+    sound.setNumberOfLoops(-1);
+    Animated.timing(animEffect, {
+      toValue: 1.1,
+      duration: animDuration,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const animOut = () => {
+    Animated.timing(animEffect, {
+      toValue: 1,
+      duration: animDuration,
+      useNativeDriver: true,
+    }).start(() => {
+      sound.stop();
+    });
+  };
 
   const directionStyle = { transform: [{ rotateZ: direction }] };
 
-  const animatSequence = () => { sound.play(); }
-
   return (
     <View style={[BOARD_THEME, directionStyle]}>
-      <TouchableOpacity
-        style={[SEQUENCE_BTN, { borderColor: btnColor }]}
-        active={active}
-        onPress={() => animatSequence()}
-      />
+      <Animated.View style={{ transform: [{ scale: animEffect }, { perspective: 1000 }] }}>
+        <Pressable
+          style={[SEQUENCE_BTN, { borderColor: btnColor }]}
+          disabled={active}
+          onPress={onPress}
+          onPressIn={() => { animIn(); }}
+          onPressOut={() => { animOut(); }}
+        />
+      </Animated.View>
     </View>
   );
 };

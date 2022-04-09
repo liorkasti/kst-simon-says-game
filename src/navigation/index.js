@@ -34,7 +34,7 @@ const App = () => {
             tabBarLabel: 'ScoreBoard',
             tabBarColor: '#694fad',
             tabBarIcon: ({ color }) => (
-              <Icon name="scoreboard" color={color} size={20} />
+              <Icon name="podium" color={color} size={20} />
             ),
           }}
         />

@@ -6,7 +6,5 @@ const sound1 = new Sound("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"
 const sound2 = new Sound("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3", Sound.MAIN_BUNDLE);
 const sound3 = new Sound("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3", Sound.MAIN_BUNDLE);
 const sound4 = new Sound("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3", Sound.MAIN_BUNDLE);
-const start = new Sound("https://s3.amazonaws.com/freecodecamp/simonSoundPlay.mp3", Sound.MAIN_BUNDLE).setVolume(0.1);
-const gameOver = new Sound("incorrect.mp3", Sound.MAIN_BUNDLE).setVolume(0.1);
 
 export const BOARS_SOUNDS = [sound1, sound2, sound3, sound4, start, gameOver];

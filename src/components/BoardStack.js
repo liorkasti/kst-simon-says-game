@@ -1,18 +1,36 @@
-import React, { useState, } from 'react'
-import { BackHandler, I18nManager, StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, I18nManager } from 'react-native';
 import PlayButton from '../components/PlayButton';
 import SeqButton from './SeqButton';
 import { BUTTON_THEME } from '../constants/theme';
 import { BOARS_SOUNDS } from '../constants/sounds';
 
 const BoardStack = ({ navigation }) => {
-    const [active, setActive] = useState(false); // state var to disable buttons when not playing or computer sequence is playing
+    const [active, setActive] = useState(false);
 
     const isRtl = I18nManager.isRTL;
+
+    const playButtonPressed = () => {
+        console.log('active :>> ', active);
+        animatPlay();
+        setTimeout(() => setActive(true), 2000);
+    };
+
+    const animatPlay = () => {
+        seqAnimation(0);
+        setTimeout(() => { seqAnimation(1) }, 100);
+        setTimeout(() => { seqAnimation(2) }, 200);
+        setTimeout(() => { seqAnimation(3) }, 300);
+    }
+
+    const seqAnimation = (s) => {
+        BOARS_SOUNDS[s].play();
+    }
 
     return (
         <View style={styles.mainContainer}>
             <View style={styles.buttonsContainer}>
+
                 <View style={styles.row}>
                     <SeqButton
                         btnColor={BUTTON_THEME.green}
@@ -44,7 +62,8 @@ const BoardStack = ({ navigation }) => {
 
             </View>
             <PlayButton
-                active={!active}
+                active={active}
+                onPress={() => playButtonPressed()}
                 sound={BOARS_SOUNDS}
             />
         </View>
