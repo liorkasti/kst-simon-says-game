@@ -39,6 +39,7 @@ Enjoy! thank you.
 - [x] Add Game Screen Buttons
 - [x] Add Game Screen Sounds
 - [x] Add Game Screen animation
+- [x] Support dark mode background
 - [ ] Add Game Screen logic
 - [ ] Add ScoreSheet Screen UI
 - [ ] Add ScoreSheet Screen logic
