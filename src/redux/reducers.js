@@ -1,6 +1,7 @@
 const initialState = {
   level: 1,
   score: 1,
+  boardPrompt: 'Play',
   maxScore: 0,
   users: [],
 };
@@ -22,6 +23,11 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         score: state.score + payload,
+      };
+    case 'BOAD_PROMPT':
+      return {
+        ...state,
+        boardPrompt: payload,
       };
     case 'USER_MAX_SCORE':
       let maxScore;

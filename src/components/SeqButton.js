@@ -2,10 +2,9 @@ import React, { useRef } from 'react';
 import { StyleSheet, View, Animated, Pressable } from 'react-native';
 import { BOARD_THEME, SEQUENCE_BTN } from '../constants/theme';
 
-const SeqButton = ({ direction, btnColor, onPress, active, sound, ref }) => {
-
+const SeqButton = ({ direction, btnColor, onPress, active, sound }) => {
   const animEffect = useRef(new Animated.Value(1)).current;
-  const animDuration = 25;
+  const animDuration = 50;
 
   const animIn = () => {
     sound.play();

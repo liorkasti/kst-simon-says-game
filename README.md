@@ -40,7 +40,8 @@ Enjoy! thank you.
 - [x] Add Game Screen Sounds
 - [x] Add Game Screen animation
 - [x] Support dark mode background
-- [ ] Add Game Screen logic
+- [x] Add Game Screen logic
+- [ ] Render game sequence animation persistently
 - [ ] Add ScoreSheet Screen UI
 - [ ] Add ScoreSheet Screen logic
 - [ ] Add dynamic GameOver modal UI
