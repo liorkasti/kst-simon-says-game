@@ -42,13 +42,14 @@ Enjoy! thank you.
 - [x] Support dark mode background
 - [x] Add Game Screen logic
 - [ ] Render game sequence animation persistently
+- [ ] Modify updateScore and boardPrompt reducers (utilize redux or context)
 - [ ] Add ScoreSheet Screen UI
 - [ ] Add ScoreSheet Screen logic
 - [ ] Add dynamic GameOver modal UI
 - [ ] Add dynamic GameOver modal logic
 - [ ] Add dynamic alert popup
-- [ ] Add dynamic hooks
-- [ ] Save Game Score
+- [ ] Add dynamic hooks 
+- [ ] Save game top score on cloud
 - [ ] Add theme switch accessibility
 - [ ] Enhance bottom tab navigation
 - [ ] Add Splash Screen

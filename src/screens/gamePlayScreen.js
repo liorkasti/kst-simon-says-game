@@ -7,7 +7,7 @@ const GamePlayScreen = ({ navigation }) => {
 
   return (
     <Background>
-      <BoardStack />
+      <BoardStack navigation={navigation} />
     </Background>
   );
 };

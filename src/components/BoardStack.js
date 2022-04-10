@@ -31,10 +31,10 @@ const BoardStack = ({ navigation }) => {
 
     useEffect(() => {
         setSimonSequence([randomPick()]);
-        console.log('simonSequence: ', simonSequence);
+        console.log('simonSays: ', simonSequence)
         return () => {
             setSimonSequence([]);
-            console.log('simonSequence: ', simonSequence);
+            console.log('simonSays: ', simonSequence)
         }
     }, []);
 
@@ -42,7 +42,7 @@ const BoardStack = ({ navigation }) => {
         if (userSequence.length !== 0) {
             verifySequence();
         }
-        console.log('simonSequence: ', simonSequence)
+        console.log('simonSays: ', simonSequence)
         console.log('userSequence: ', userSequence)
     }, [userSequence]);
 
@@ -79,17 +79,14 @@ const BoardStack = ({ navigation }) => {
     };
 
     const playButtonPressed = () => {
-        console.log('active :>> ', active);
-        // animatPlay();
+        console.log('active :> ', active);
         console.log('simonSays: ', simonSequence)
+        animatPlay();
         setTimeout(() => setActive(true), 2000);
     };
 
     const animatPlay = () => {
-        soundEffect(0);
-        setTimeout(() => { soundEffect(1) }, 100);
-        setTimeout(() => { soundEffect(2) }, 200);
-        setTimeout(() => { soundEffect(3) }, 300);
+        //TODO: Render game sequence animation persistently
     }
 
     const soundEffect = (s) => {
