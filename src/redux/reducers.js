@@ -1,6 +1,16 @@
+import {
+  RISE_LEVEL
+  , COUNTDOWN_OVER
+  , INIT_SCORE
+  , SET_SCORE
+  , SET_PROMPT
+  , USER_MAX_SCORE
+  , ADD_USER
+} from './types';
+
 const initialState = {
   level: 1,
-  score: 1,
+  score: 0,
   boardPrompt: 'Play',
   maxScore: 0,
   users: [],
@@ -9,27 +19,28 @@ const initialState = {
 const reducers = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case 'RISE_LEVEL':
+    //TODO: setPrompt and setScore
+    case RISE_LEVEL:
       return {
         ...state,
         level: state.level + 1,
       };
-    case 'INIT_SCORE':
+    case INIT_SCORE:
       return {
         ...state,
         score: 0,
       };
-    case 'UPDATE_SCORE':
+    case SET_SCORE:
       return {
         ...state,
-        score: state.score + payload,
+        score: payload,
       };
-    case 'BOAD_PROMPT':
+    case SET_PROMPT:
       return {
         ...state,
         boardPrompt: payload,
       };
-    case 'USER_MAX_SCORE':
+    case USER_MAX_SCORE:
       let maxScore;
       const userScore = payload;
       state.maxScore > userScore
@@ -40,7 +51,7 @@ const reducers = (state = initialState, action) => {
         ...state,
         maxScore,
       };
-    case 'ADD_USER':
+    case ADD_USER:
       const { userName, userPhone } = payload;
       let newUser = state.users.find((user) => {
         if (user.userPhone === userPhone && user.userName === userName) {

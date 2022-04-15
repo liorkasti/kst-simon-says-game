@@ -3,17 +3,15 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 import { START_BTN } from '../constants/theme';
 
-const PlayButton = ({ onPress, active, sound }) => {
-
-  const startText = "Play";
+const PlayButton = ({ onPress, active, prompt }) => {
 
   return (
     <TouchableOpacity
-      disabled={active}
+      disabled={!active}
       style={START_BTN}
       onPress={onPress}
     >
-      <Text style={styles.text}>{startText}</Text>
+      <Text style={styles.text}>{prompt}</Text>
     </TouchableOpacity >
   );
 };

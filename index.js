@@ -13,9 +13,9 @@ import configureStore from './src/redux/store';
 const store = configureStore();
 console.log('store: ', store)
 
-const ReduxTutorial = () =>
+const myApp = () =>
     <Provider store={store}>
         <App />
     </Provider>
 
-AppRegistry.registerComponent(appName, () => ReduxTutorial);
+AppRegistry.registerComponent(appName, () => myApp);

@@ -2,14 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, StyleSheet, I18nManager } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import store from '../redux/store';
 import {
     riseLevel
     , initLife
     , initScore
     , decrementLife
-    , updateScore
-    , boardPrompt
+    , setScore
+    , setPrompt
     , userMaxScore
 } from '../redux/actions';
 import PlayButton from '../components/PlayButton';
@@ -18,33 +17,86 @@ import { BUTTON_THEME } from '../constants/theme';
 import { BOARS_SOUNDS } from '../constants/sounds';
 
 const BoardStack = ({ navigation }) => {
-    const [active, setActive] = useState(false);
+    const [activePlay, setActivePlay] = useState(true);
+    const [activeSeq, setActiveSeq] = useState(false);
+    const [level, setLevel] = useState(0);
     const [simonSequence, setSimonSequence] = useState([]);
     const [userSequence, setUserSequence] = useState([]);
-    const [level, setLevel] = useState(0);
+
+    const greenRef = useRef();
+    const redRef = useRef();
+    const blueRef = useRef();
+    const yellowRef = useRef();
+
+    const state = useSelector((state) => state);
+    const { score, boardPrompt } = useSelector(state => state.reducers);
+    const dispatch = useDispatch();
 
     const isRtl = I18nManager.isRTL;
 
-    const state = useSelector((state) => state);
-    const { boardPrompt, score } = useSelector((state) => state);
-    const dispatch = useDispatch();
-
+    //Initate game on first load
     useEffect(() => {
-        setSimonSequence([randomPick()]);
-        console.log('simonSays: ', simonSequence)
+        setSimonSequence([]);
+        dispatch(setScore(0));
         return () => {
             setSimonSequence([]);
-            console.log('simonSays: ', simonSequence)
+            dispatch(setScore(0));
         }
     }, []);
 
+    //Initate game on 'Simon Says'
+    useEffect(() => {
+        animateSequence();
+    }, [simonSequence]);
+
+    //Initate game on sequence button press
     useEffect(() => {
         if (userSequence.length !== 0) {
             verifySequence();
         }
         console.log('simonSays: ', simonSequence)
         console.log('userSequence: ', userSequence)
+        console.log('score: ', score)
     }, [userSequence]);
+
+    const playButtonHandler = () => {
+        //TODO: useCountdown hook
+        setActivePlay(false);
+        setLevel(0);
+        dispatch(setScore(0));
+        dispatch(setPrompt(`score: 0`));
+        setSimonSequence([randomPick()]);
+        setUserSequence([]);
+        setActiveSeq(true);
+    };
+
+    const animateSequence = () => {
+        setActiveSeq(false)
+        let seq = 0;
+        let interval = setInterval(() => {
+            switch (simonSequence[seq]) {
+                case 0:
+                    greenRef?.current.pressEffect();
+                    break;
+                case 1:
+                    redRef?.current.pressEffect();
+                    break;
+                case 2:
+                    blueRef?.current.pressEffect();
+                    break;
+                case 3:
+                    yellowRef?.current.pressEffect();
+                    break;
+            }
+
+            if (++seq === simonSequence.length) {
+                clearInterval(interval);
+            }
+            if (seq === simonSequence.length) {
+                setActiveSeq(true);
+            }
+        }, 1000);
+    }
 
     const verifySequence = () => {
         if (simonSequence.length !== userSequence.length) {
@@ -65,33 +117,23 @@ const BoardStack = ({ navigation }) => {
     };
 
     const levelUp = () => {
-        dispatch(updateScore(score + 1));
+        dispatch(setScore(score + 1));
+        dispatch(setPrompt(`score: ${score + 1}`));
         setUserSequence([]);
         setLevel(0);
         generateNewSequenced();
-    }
+    };
 
     const gameOver = () => {
+        console.log('game over! ');
+        dispatch(setScore(0));
         setUserSequence([]);
         setLevel(0);
-        setSimonSequence([randomPick()]);
-        setActive(false)
+        dispatch(setPrompt(`Play`));
+        setSimonSequence([]);
+        setActiveSeq(false)
+        setActivePlay(true)
     };
-
-    const playButtonPressed = () => {
-        console.log('active :> ', active);
-        console.log('simonSays: ', simonSequence)
-        animatPlay();
-        setTimeout(() => setActive(true), 2000);
-    };
-
-    const animatPlay = () => {
-        //TODO: Render game sequence animation persistently
-    }
-
-    const soundEffect = (s) => {
-        BOARS_SOUNDS[s].play();
-    }
 
     const randomPick = () => {
         return Math.floor(Math.random() * 4);
@@ -101,54 +143,57 @@ const BoardStack = ({ navigation }) => {
         setSimonSequence([...simonSequence, randomPick()]);
     }
 
-    const onUserSequence = val => {
-        setUserSequence([...userSequence, val]);
+    const onUserSequence = seq => {
+        setUserSequence([...userSequence, seq]);
     }
 
     return (
         <View style={styles.mainContainer}>
+            <PlayButton
+                active={activePlay}
+                onPress={() => playButtonHandler()}
+                sound={BOARS_SOUNDS}
+                prompt={boardPrompt}
+            />
             <View style={styles.buttonsContainer}>
-
                 <View style={styles.row}>
                     <SeqButton
                         btnColor={BUTTON_THEME.green}
                         direction={'0deg'}
-                        active={!active}
+                        active={activeSeq}
                         sound={BOARS_SOUNDS[0]}
                         onPress={() => onUserSequence(0)}
+                        ref={greenRef}
                     />
                     <SeqButton
                         btnColor={BUTTON_THEME.red}
                         direction={isRtl ? '270deg' : '90deg'}
-                        active={!active}
+                        active={activeSeq}
                         sound={BOARS_SOUNDS[1]}
                         onPress={() => onUserSequence(1)}
+                        ref={redRef}
                     />
                 </View>
                 <View style={styles.row}>
                     <SeqButton
                         btnColor={BUTTON_THEME.blue}
                         direction={isRtl ? '90deg' : '270deg'}
-                        active={!active}
+                        active={activeSeq}
                         sound={BOARS_SOUNDS[2]}
                         onPress={() => onUserSequence(2)}
+                        ref={blueRef}
                     />
                     <SeqButton
                         btnColor={BUTTON_THEME.yellow}
                         direction={'180deg'}
-                        active={!active}
+                        active={activeSeq}
                         sound={BOARS_SOUNDS[3]}
                         onPress={() => onUserSequence(3)}
+                        ref={yellowRef}
                     />
                 </View>
 
             </View>
-            <PlayButton
-                active={active}
-                onPress={() => playButtonPressed()}
-                sound={BOARS_SOUNDS}
-                boardPrompt={boardPrompt}
-            />
         </View>
     )
 }

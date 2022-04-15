@@ -2,8 +2,8 @@ import {
   RISE_LEVEL
   , COUNTDOWN_OVER
   , INIT_SCORE
-  , UPDATE_SCORE
-  , BOAD_PROMPT
+  , SET_SCORE
+  , SET_PROMPT
   , USER_MAX_SCORE
   , ADD_USER
 } from './types';
@@ -18,17 +18,17 @@ export const initScore = {
   payload: 'initScore',
 };
 
-export const updateScore = number => {
+export const setScore = number => {
   return {
-    type: UPDATE_SCORE,
+    type: SET_SCORE,
     payload: number,
   };
 };
 
-export const boardPrompt = Prompt => dispatch => {
-  dispatch({
-    type: BOAD_PROMPT,
-    payload: Prompt,
+export const setPrompt = prompt => {
+  return ({
+    type: SET_PROMPT,
+    payload: prompt,
   });
 };
 
