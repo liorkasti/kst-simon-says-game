@@ -1,6 +1,5 @@
 import {
   RISE_LEVEL
-  , COUNTDOWN_OVER
   , INIT_SCORE
   , SET_SCORE
   , SET_PROMPT
@@ -40,12 +39,12 @@ export const userMaxScore = (userScore) => {
   };
 };
 
-export const addUser = (userName, userPhone) => {
+export const addUser = (userName, score) => {
   return {
     type: ADD_USER,
     payload: {
       userName,
-      userPhone,
+      score,
     },
   };
 };

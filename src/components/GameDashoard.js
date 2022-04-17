@@ -2,21 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, StyleSheet, I18nManager } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-    riseLevel
-    , initLife
-    , initScore
-    , decrementLife
-    , setScore
-    , setPrompt
-    , userMaxScore
-} from '../redux/actions';
-import PlayButton from '../components/PlayButton';
+import { setScore, setPrompt, userMaxScore } from '../redux/actions';
+import PlayButton from './PlayButton';
 import SeqButton from './SeqButton';
 import { BUTTON_THEME } from '../constants/theme';
 import { BOARS_SOUNDS } from '../constants/sounds';
+import GameOver from './GameOver';
 
-const BoardStack = ({ navigation }) => {
+const GameDashoard = ({ navigation }) => {
     const [activePlay, setActivePlay] = useState(true);
     const [activeSeq, setActiveSeq] = useState(false);
     const [level, setLevel] = useState(0);
@@ -27,6 +20,7 @@ const BoardStack = ({ navigation }) => {
     const redRef = useRef();
     const blueRef = useRef();
     const yellowRef = useRef();
+    const modalRef = useRef();
 
     const state = useSelector((state) => state);
     const { score, boardPrompt } = useSelector(state => state.reducers);
@@ -51,7 +45,7 @@ const BoardStack = ({ navigation }) => {
 
     //Initate game on sequence button press
     useEffect(() => {
-        if (userSequence.length !== 0) {
+        if (userSequence?.length !== 0) {
             verifySequence();
         }
         console.log('simonSays: ', simonSequence)
@@ -64,11 +58,21 @@ const BoardStack = ({ navigation }) => {
         setActivePlay(false);
         setLevel(0);
         dispatch(setScore(0));
+        dispatch(userMaxScore(score));
         dispatch(setPrompt(`score: 0`));
         setSimonSequence([randomPick()]);
         setUserSequence([]);
         setActiveSeq(true);
     };
+
+
+    /*     //TODO: useTimerID ref
+        const timerId = useRef();
+        const [seconds, setSeconds] = useState(0);
+    
+            setActiveSeq(false)
+            timerId.current = setInterval(() => {
+                setSeconds(prev => prev + 1); */
 
     const animateSequence = () => {
         setActiveSeq(false)
@@ -126,13 +130,14 @@ const BoardStack = ({ navigation }) => {
 
     const gameOver = () => {
         console.log('game over! ');
-        dispatch(setScore(0));
+        dispatch(userMaxScore(score));
         setUserSequence([]);
         setLevel(0);
         dispatch(setPrompt(`Play`));
         setSimonSequence([]);
         setActiveSeq(false)
         setActivePlay(true)
+        handleOpenModal();
     };
 
     const randomPick = () => {
@@ -146,9 +151,13 @@ const BoardStack = ({ navigation }) => {
     const onUserSequence = seq => {
         setUserSequence([...userSequence, seq]);
     }
+    const handleOpenModal = () => {
+        modalRef.current.openModal();
+    }
 
     return (
         <View style={styles.mainContainer}>
+            <GameOver ref={modalRef} level={level} navigation={navigation} />
             <PlayButton
                 active={activePlay}
                 onPress={() => playButtonHandler()}
@@ -196,7 +205,7 @@ const BoardStack = ({ navigation }) => {
             </View>
         </View>
     )
-}
+};
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -219,4 +228,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BoardStack
+export default GameDashoard

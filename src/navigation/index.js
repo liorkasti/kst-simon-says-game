@@ -31,7 +31,7 @@ const App = () => {
           name="ScoreSheet"
           component={ScoreSheetScreen}
           options={{
-            tabBarLabel: 'ScoreBoard',
+            tabBarLabel: 'ScoreSheet',
             tabBarColor: '#694fad',
             tabBarIcon: ({ color }) => (
               <Icon name="podium" color={color} size={20} />

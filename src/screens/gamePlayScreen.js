@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import BoardStack from '../components/BoardStack';
+import GameDashoard from '../components/GameDashoard';
 import Background from '../components/Background';
 
 const GamePlayScreen = ({ navigation }) => {
 
   return (
     <Background>
-      <BoardStack navigation={navigation} />
+      <GameDashoard navigation={navigation} />
     </Background>
   );
 };

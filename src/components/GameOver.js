@@ -1,14 +1,164 @@
-import { Text, View } from 'react-native'
-import React, { Component } from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useState, } from 'react';
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  Modal,
+  Platform,
+  TextInput,
+  TouchableOpacity,
+  Dimensions
+} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
-export class GameOver extends Component {
-    render() {
-        return (
-            <View>
-                <Text>GameOver</Text>
-            </View>
-        )
+import { setScore, addUser, setPrompt, userMaxScore } from '../redux/actions';
+
+const GameOver = ({ navigation }, ref) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [userName, setUserName] = useState('')
+
+  const state = useSelector((state) => state);
+  const { score, maxScore, topScores } = useSelector(state => state.reducers);
+  const dispatch = useDispatch();
+
+  useImperativeHandle(ref, () => ({
+    openModal: () => {
+      console.log('open modal');
+      setModalVisible(true);
+    },
+  }));
+
+  const onSubmit = () => {
+    if (userName?.length != 0) {
+      dispatch(addUser(userName, score))
+      setModalVisible(false);
+      //TODO: useNavigation
+      navigation.navigate('ScoreSheet');
+    } else {
+      //TODO:dynamic prompt alert
     }
+  };
+
+  return (
+    <Modal
+      visible={modalVisible}
+      animationType='slide'
+      transparent={true}
+      onRequestClose={() => setModalVisible(false)}
+      style={styles.centeredView}
+    >
+      <View style={StyleSheet.absoluteFill} />
+      <TouchableOpacity //An overlay for closes the modal when press outside modal
+        style={StyleSheet.absoluteFill}
+        onPress={() => {
+          setModalVisible(false);
+        }}
+      />
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <Text style={styles.modalText}>
+            Welldone! level {score}
+          </Text>
+          <TextInput
+            style={styles.modalInput}
+            maxLength={15}
+            defaultValue={userName}
+            onChangeText={(value) => setUserName(value)}
+            placeholder="Enter your name"
+            placeholderTextColor={'#444'}
+            autoFocus
+          />
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={styles.modalBtn}
+            onPress={() => onSubmit()}>
+            <Text style={styles.modalBtnText}>
+              Done
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </Modal>
+  )
 }
 
-export default GameOver;
+const windowHeight = Dimensions.get('window').height
+const windoWidth = Dimensions.get('window').width
+
+const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1000,
+  },
+
+  modalView: {
+    width: windoWidth * .8,
+    height: windowHeight * .5,
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 20,
+    marginTop: -20,
+    backgroundColor: "#ddd",
+    borderRadius: 14,
+    padding: 35,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+
+  modalText: {
+    fontSize: 18,
+    fontWeight: '300',
+    color: '#000',
+    fontFamily: Platform.OS === 'ios' ? 'Arial' : 'sans-serif-medium'
+  },
+
+  modalInput: {
+    backgroundColor: '#eee',
+    color: '#000',
+    width: '100%',
+    fontSize: 16,
+    fontWeight: '300',
+    textAlign: 'center',
+    borderRadius: 10,
+    marginBottom: 20,
+    marginTop: 20,
+    fontFamily: Platform.OS === 'ios' ? 'Arial' : 'sans-serif-medium'
+  },
+
+  modalBtn: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#444',
+    width: '50%',
+    padding: 15,
+    marginTop: 10,
+    marginBottom: 10,
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4
+  },
+
+  modalBtnText: {
+    fontSize: 20,
+    color: '#fff',
+    fontWeight: '600',
+    fontFamily: Platform.OS === 'ios' ? 'Arial' : 'sans-serif-medium'
+  }
+})
+
+export default forwardRef(GameOver);

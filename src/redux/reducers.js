@@ -1,6 +1,5 @@
 import {
   RISE_LEVEL
-  , COUNTDOWN_OVER
   , INIT_SCORE
   , SET_SCORE
   , SET_PROMPT
@@ -13,7 +12,7 @@ const initialState = {
   score: 0,
   boardPrompt: 'Play',
   maxScore: 0,
-  users: [],
+  topScores: [],
 };
 
 const reducers = (state = initialState, action) => {
@@ -52,34 +51,24 @@ const reducers = (state = initialState, action) => {
         maxScore,
       };
     case ADD_USER:
-      const { userName, userPhone } = payload;
-      let newUser = state.users.find((user) => {
-        if (user.userPhone === userPhone && user.userName === userName) {
-          return user;
-        }
-      });
+      const { userName, score } = payload;
+      console.log('payload :>> ', payload);
+      if (state.topScores.length < 20) {
+        state.topScores.push(payload)
 
-      let user = {};
-      user = newUser
-        ? (user = { ...newUser, userMaxScore: state.maxScore })
-        : (user = { userName, userPhone, userMaxScore: state.maxScore });
-      const users = [...state.users];
-      console.log('Users: ', users);
-      const userIndex = state.users.findIndex(
-        (user) => user.userPhone === userPhone && user.userName === userName
-      );
-      if (userIndex !== -1) {
-        users[userIndex].userPhone = user.userPhone;
-        users[userIndex].userMaxScore = user.userMaxScore;
-        users[userIndex].userName = user.userName;
       } else {
-        users.push(user);
+        const smallestResult = state.topScores.splice(-1)[0]
+
+        if (smallestResult.score < payload.score) {
+          state.topScores.push(payload)
+
+        } else {
+          state.topScores.push(smallestResult)
+        }
       }
 
-      return {
-        ...state,
-        users: [...users],
-      };
+      state.topScores.sort((item1, item2) => item1.score < item2.score ? 1 : -1)
+      return { ...state, topScores: state.topScores };
 
     default:
       return { ...state };

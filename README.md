@@ -43,13 +43,10 @@ Enjoy! thank you.
 - [x] Add Game Screen logic
 - [x] Render game sequence animation persistently
 - [x] Modify updateScore and boardPrompt reducers
-- [ ] Add ScoreSheet Screen UI
-- [ ] Add ScoreSheet Screen logic
-- [ ] Add dynamic GameOver modal UI
-- [ ] Add dynamic GameOver modal logic
-- [ ] Add dynamic alert popup
-- [ ] Add dynamic hooks 
+- [x] Add ScoreSheet Screen
+- [x] Add GameOver modal
 - [ ] Save game top score on cloud
+- [ ] Add dynamic game state modal and alert popup
 - [ ] Add theme switch accessibility
-- [ ] Enhance bottom tab navigation
+- [ ] Enhance navigation- Add drawer and remove bottom bar 
 - [ ] Add Splash Screen
