@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Background from '../components/Background';
-import { APP_THEME } from '../constants/theme';
 
 const ScoreSheetScreen = ({ navigation }) => {
   const state = useSelector((state) => state);
@@ -42,8 +41,6 @@ const ScoreSheetScreen = ({ navigation }) => {
     </Background>
   );
 };
-
-const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {

@@ -54,7 +54,7 @@ const GameDashoard = ({ navigation }) => {
     }, [userSequence]);
 
     const playButtonHandler = () => {
-        //TODO: useCountdown hook
+        //TODO: Add useCountdown hook
         setActivePlay(false);
         setLevel(0);
         dispatch(setScore(0));
@@ -72,7 +72,9 @@ const GameDashoard = ({ navigation }) => {
     
             setActiveSeq(false)
             timerId.current = setInterval(() => {
-                setSeconds(prev => prev + 1); */
+                setSeconds(prev => prev + 1); 
+                ...
+                */
 
     const animateSequence = () => {
         setActiveSeq(false)

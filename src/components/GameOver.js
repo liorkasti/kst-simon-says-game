@@ -1,15 +1,5 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState, } from 'react';
-import {
-  View,
-  Text,
-  Pressable,
-  StyleSheet,
-  Modal,
-  Platform,
-  TextInput,
-  TouchableOpacity,
-  Dimensions
-} from 'react-native';
+import {  View,  Text,  Pressable,  StyleSheet,  Modal,  Platform,  TextInput,  TouchableOpacity,  Dimensions,  } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setScore, addUser, setPrompt, userMaxScore } from '../redux/actions';

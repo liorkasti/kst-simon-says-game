@@ -2,8 +2,7 @@ import React from 'react'
 import { ImageBackground, StyleSheet, Dimensions, useColorScheme } from 'react-native'
 import { Colors as Theme } from 'react-native/Libraries/NewAppScreen';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+import { HEIGHT, WIDTH } from '../constants/theme';
 
 const Background = ({ children }) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -12,7 +11,7 @@ const Background = ({ children }) => {
     <ImageBackground
       source={require('../assets/background_dot2x.png')}
       resizeMode="repeat"
-      style={{ flex: 1, weight: windowWidth, height: windowHeight, backgroundColor: isDarkMode ? Theme.darker : Theme.lighter }}
+      style={{ flex: 1, weight: WIDTH, height: HEIGHT, backgroundColor: isDarkMode ? Theme.darker : Theme.lighter }}
     >
       {children}
     </ImageBackground >
