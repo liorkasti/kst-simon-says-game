@@ -1,14 +1,14 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState, } from 'react';
-import {  View,  Text,  Pressable,  StyleSheet,  Modal,  Platform,  TextInput,  TouchableOpacity,  Dimensions,  } from 'react-native';
+import { View, Text, Pressable, StyleSheet, Modal, Platform, TextInput, TouchableOpacity, Dimensions, } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setScore, addUser, setPrompt, userMaxScore } from '../redux/actions';
+import { storeData, fetchData, addUser, setPrompt } from '../redux/actions';
 
 const GameOver = ({ navigation }, ref) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [isDone, setIsDone] = useState(false);
   const [userName, setUserName] = useState('')
 
-  const state = useSelector((state) => state);
   const { score, maxScore, topScores } = useSelector(state => state.reducers);
   const dispatch = useDispatch();
 
@@ -19,11 +19,21 @@ const GameOver = ({ navigation }, ref) => {
     },
   }));
 
+  const userNameHandler = (name) => {
+    setModalVisible(name)
+    if (userName?.length > 3) {
+      setIsDone(true);
+    } else {
+      //TODO:dynamic prompt alert
+      setIsDone(false);
+    }
+  };
+
   const onSubmit = () => {
     if (userName?.length != 0) {
-      dispatch(addUser(userName, score))
+      dispatch(storeData(userName, score, () => dispatch(fetchData())));
       setModalVisible(false);
-      //TODO: useNavigation
+      //TODO: useNavigation or openDrawer
       navigation.navigate('ScoreSheet');
     } else {
       //TODO:dynamic prompt alert
@@ -55,16 +65,18 @@ const GameOver = ({ navigation }, ref) => {
             maxLength={15}
             defaultValue={userName}
             onChangeText={(value) => setUserName(value)}
+            // onChangeText={(value) => userNameHandler(value)}
             placeholder="Enter your name"
             placeholderTextColor={'#444'}
             autoFocus
           />
           <TouchableOpacity
             activeOpacity={0.8}
+            // disabled={!isDone}
             style={styles.modalBtn}
             onPress={() => onSubmit()}>
             <Text style={styles.modalBtnText}>
-              Done
+              Submit
             </Text>
           </TouchableOpacity>
         </View>

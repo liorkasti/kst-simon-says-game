@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, StyleSheet, I18nManager } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setScore, setPrompt, userMaxScore } from '../redux/actions';
+import { fetchData, setScore, setPrompt, userMaxScore } from '../redux/actions';
 import PlayButton from './PlayButton';
 import SeqButton from './SeqButton';
 import { BUTTON_THEME } from '../constants/theme';
@@ -22,7 +22,6 @@ const GameDashoard = ({ navigation }) => {
     const yellowRef = useRef();
     const modalRef = useRef();
 
-    const state = useSelector((state) => state);
     const { score, boardPrompt } = useSelector(state => state.reducers);
     const dispatch = useDispatch();
 
@@ -32,6 +31,8 @@ const GameDashoard = ({ navigation }) => {
     useEffect(() => {
         setSimonSequence([]);
         dispatch(setScore(0));
+        // dispatch(fetchData());
+
         return () => {
             setSimonSequence([]);
             dispatch(setScore(0));

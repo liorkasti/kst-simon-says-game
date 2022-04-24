@@ -10,6 +10,9 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-firebase/app": "^14.8.0",
+    "@react-native-firebase/database": "^14.8.0",
+    "@react-native-firebase/firestore": "^14.8.0",
     "@react-navigation/bottom-tabs": "5.x",
     "@react-navigation/material-bottom-tabs": "^6.x",
     "@react-navigation/native": "5.x",
@@ -24,7 +27,9 @@
     "react-native-sound": "^0.11.2",
     "react-native-vector-icons": "^9.0.0",
     "react-redux": "^7.2.8",
-    "redux": "^4.1.2"
+    "redux": "^4.1.2",
+    "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
