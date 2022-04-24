@@ -10,7 +10,7 @@ import ScoreSheetScreen from '../screens/scoreSheetScreen';
 const App = () => {
   useEffect(() => {
     setTimeout(() => { Orientation.lockToPortrait(); });
-  });
+  }, []);
 
   const Tab = createMaterialBottomTabNavigator();
   return (

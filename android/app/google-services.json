@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "771618113670",
+    "project_id": "kasti-says",
+    "storage_bucket": "kasti-says.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771618113670:android:34b2139df49c4a7efda907",
+        "android_client_info": {
+          "package_name": "com.kastisays"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771618113670-qbpp643fuvlfkqvt80atqcuq0c8kitpd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kastisays",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "771618113670-refrnv3g3cavmf97okoum5loim70bovq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBILYL29DAwl27Skoau09k-C63rYnR9T3o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771618113670-refrnv3g3cavmf97okoum5loim70bovq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
