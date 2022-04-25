@@ -45,8 +45,8 @@ Enjoy! thank you.
 - [x] Modify updateScore and boardPrompt reducers
 - [x] Add ScoreSheet Screen
 - [x] Add GameOver modal
-- [x] Save game top score on cloud
+- [x] Save game's top score on cloud
 - [ ] Add dynamic game state modal and alert popup
 - [ ] Add theme switch accessibility
-- [ ] Enhance navigation- Add drawer and remove bottom bar 
+- [ ] Enhance navigation- Add drawer and remove bottom bar
 - [ ] Add Splash Screen

@@ -9,6 +9,7 @@ import ScoreSheetScreen from '../screens/scoreSheetScreen';
 
 const App = () => {
   useEffect(() => {
+    console.disableYellowBox = true;
     setTimeout(() => { Orientation.lockToPortrait(); });
   }, []);
 
