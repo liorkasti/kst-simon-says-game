@@ -40,7 +40,7 @@ const reducers = (state = initialState, action) => {
       return { ...state, maxScore, };
 
     case GET_SCORES:
-      let { topScores } = payload;
+      // let { topScores } = payload;
       return { ...state, topScores: payload };
 
     default:

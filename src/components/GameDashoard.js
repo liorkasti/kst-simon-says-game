@@ -31,7 +31,6 @@ const GameDashoard = ({ navigation }) => {
     useEffect(() => {
         setSimonSequence([]);
         dispatch(setScore(0));
-        // dispatch(fetchData());
 
         return () => {
             setSimonSequence([]);
@@ -204,7 +203,6 @@ const GameDashoard = ({ navigation }) => {
                         ref={yellowRef}
                     />
                 </View>
-
             </View>
         </View>
     )

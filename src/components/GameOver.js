@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState, } from 'react';
-import { View, Text, Pressable, StyleSheet, Modal, Platform, TextInput, TouchableOpacity, Dimensions, } from 'react-native';
+import { View, Text, Alert, StyleSheet, Modal, Platform, TextInput, TouchableOpacity, Dimensions, } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { storeData, fetchData, addUser, setPrompt } from '../redux/actions';
@@ -20,12 +20,11 @@ const GameOver = ({ navigation }, ref) => {
   }));
 
   const userNameHandler = (name) => {
-    setModalVisible(name)
+    setModalVisible(true)
     if (userName?.length > 3) {
-      setIsDone(true);
+      setUserName(value)
     } else {
       //TODO:dynamic prompt alert
-      setIsDone(false);
     }
   };
 
@@ -34,7 +33,8 @@ const GameOver = ({ navigation }, ref) => {
       dispatch(storeData(userName, score, () => dispatch(fetchData())));
       setModalVisible(false);
       //TODO: useNavigation or openDrawer
-      navigation.navigate('ScoreSheet');
+      navigation.openDrawer();
+      // navigation.navigate('ScoreSheet');
     } else {
       //TODO:dynamic prompt alert
     }

@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchData } from '../redux/actions';
+import { fetchScores } from '../redux/actions';
 import Background from '../components/Background';
 
 const ScoreSheetScreen = ({ navigation }) => {
@@ -15,7 +15,7 @@ const ScoreSheetScreen = ({ navigation }) => {
 
   // const topScores = ref.get();
   useEffect(() => {
-    dispatch(fetchData());
+    dispatch(fetchScores());
   }, []);
 
   const renderItem = item => {
