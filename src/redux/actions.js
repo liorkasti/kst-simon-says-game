@@ -2,25 +2,7 @@ import firestore from '@react-native-firebase/firestore';
 
 import { ref } from '../constants/cloud';
 
-import {
-  RISE_LEVEL
-  , INIT_SCORE
-  , SET_SCORE
-  , SET_PROMPT
-  , USER_MAX_SCORE
-  , ADD_SCORE
-  , GET_SCORES
-} from './types';
-
-export const riseLevel = {
-  type: RISE_LEVEL,
-  payload: 'riseLevel',
-};
-
-export const initScore = {
-  type: INIT_SCORE,
-  payload: 'initScore',
-};
+import { SET_SCORE, SET_PROMPT, FETCH_SCORES, USER_MAX_SCORE } from './types';
 
 export const setScore = number => {
   return {
@@ -43,25 +25,25 @@ export const userMaxScore = (userScore) => {
   };
 };
 
-export const storeData = async (userName, score, callback) => {
+export const storeData = async (userName, score) => {
   try {
     await ref.update({
-      topScores: firestore.FieldValue.arrayUnion({ userName, score }),
-    });
-    callback ? callback() : null;
+      topScores: firestore.FieldValue.arrayUnion({ userName, score })
+    }).then(() => { fetchScores(); });
   } catch (e) {
     console.warn('__storeData__', e);
   }
 };
 
-export const fetchData = async isFeched => {
+export const fetchScores = async isFeched => {
   try {
-    const topScores = await ref.get();
-    // console.warn(topScores?.data());
-    return dispatch => {
+    console.log('isFeched :>> ', isFeched);
+    let topScores = await ref.get();
+    console.log(topScores.data());
+    return dispatch => {  // TODO: fix warning
       isFeched ? isFeched() : null;
       dispatch({
-        type: GET_SCORES,
+        type: FETCH_SCORES,
         payload: topScores
           .data()
           .topScores?.sort((a, b) => a.score < b.score)

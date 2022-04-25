@@ -1,5 +1,5 @@
 import React, { useRef, forwardRef, useImperativeHandle } from 'react';
-import { StyleSheet, View, Animated, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Animated, Pressable } from 'react-native';
 import { BOARD_THEME, SEQUENCE_BTN } from '../constants/theme';
 
 const SeqButton = (props, ref) => {
@@ -60,7 +60,7 @@ const SeqButton = (props, ref) => {
   return (
     <View style={[BOARD_THEME, directionStyle]}>
       <Animated.View style={{ transform: [{ scale: animEffect }, { perspective: 1000 }] }}>
-        <TouchableOpacity
+        <Pressable
           style={[SEQUENCE_BTN, { borderColor: btnColor }]}
           disabled={!active}
           onPress={onPress}
