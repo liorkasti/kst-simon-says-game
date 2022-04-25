@@ -1,14 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Dimensions, StyleSheet, StatusBar, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Dimensions, StyleSheet, StatusBar } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-// import { useTheme } from '@react-navigation/native';
 
 import GameDashoard from '../components/GameDashoard';
 
 const SplashScreen = ({ navigation }) => {
-    // const { colors } = useTheme();
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor='#009387' barStyle="light-content" />
@@ -21,13 +19,14 @@ const SplashScreen = ({ navigation }) => {
                     resizeMode="stretch"
                 />
             </View>
+                <GameDashoard />
             <Animatable.View
                 style={[styles.footer, {
                     backgroundColor: '#fff'
                 }]}
                 animation="fadeInUpBig"
             >
-                <Text style={styles.title}>Play Simon Says</Text>
+                <Text style={styles.title}>Simon Says!</Text>
                 <Text style={styles.text}>Powered by Kasti</Text>
                 <View style={styles.button}>
                     <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>

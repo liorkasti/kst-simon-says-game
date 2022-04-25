@@ -16,6 +16,7 @@ import SplashScreen from '../screens/splashScreen';
 const App = () => {
 
   useEffect(() => {
+    console.disableYellowBox = true;
     // setTimeout(() => { Orientation.lockToPortrait(); });
   }, []);
 
@@ -31,6 +32,7 @@ const App = () => {
       <Tab.Navigator
         screenOptions={{
           headerShown: false,
+          activeColor: "#fff",
         }}>
         <Tab.Screen
           name="Dashboard"
@@ -63,6 +65,10 @@ const App = () => {
       <Drawer.Navigator
         screenOptions={{
           headerShown: false,
+          drawerStyle: {
+            width: '100%',
+            backgroundColor: '#f8f9f9'
+          }
         }}
         drawerContent={props => <DrawerContent {...props} />}>
         <Drawer.Screen name="Dashboard" component={TabNavigator} />

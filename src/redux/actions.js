@@ -38,9 +38,11 @@ export const storeData = async (userName, score) => {
 export const fetchScores = async isFeched => {
   try {
     let topScores = await ref.get();
-    console.log(topScores.data());
+    // console.log(topScores.data());
     return dispatch => {  // TODO: fix warning
       isFeched ? isFeched() : null;
+      console.log('isFeched :>> ', isFeched);
+
       dispatch({
         type: FETCH_SCORES,
         payload: topScores

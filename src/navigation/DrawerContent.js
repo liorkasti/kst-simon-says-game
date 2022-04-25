@@ -1,14 +1,11 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { useTheme, Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switch } from 'react-native-paper';
+import { Avatar, Title, Caption, Paragraph, Drawer } from 'react-native-paper';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import ScoreSheetScreen from '../screens/scoreSheetScreen';
 
 export function DrawerContent(props) {
-
-  const paperTheme = useTheme();
-  console.log(props)
 
   return (
     <View style={{ flex: 1 }}>
@@ -39,54 +36,10 @@ export function DrawerContent(props) {
           </View>
 
           <Drawer.Section style={styles.drawerSection}>
-            <DrawerItem
-              icon={({ color, size }) => (
-                <Icon
-                  name="home-outline"
-                  color={color}
-                  size={size}
-                />
-              )}
-              label="Dashboard"
-              onPress={() => { props.navigation.navigate('Dashboard') }}
-            />
-            <DrawerItem
-              icon={({ color, size }) => (
-                <Icon
-                  name="account-outline"
-                  color={color}
-                  size={size}
-                />
-              )}
-              label="ScoreSheet"
-              onPress={() => { props.navigation.navigate('ScoreSheet') }}
-            />
-          </Drawer.Section>
-          <Drawer.Section title="Preferences">
-            <TouchableRipple onPress={() => { /* setIsDarkTheme(isDarkTheme => !isDarkTheme); */ }}>
-              <View style={styles.preference}>
-                <Text>Dark Theme</Text>
-                <View pointerEvents="none">
-                  <Switch value={paperTheme.dark} />
-                </View>
-              </View>
-            </TouchableRipple>
+            <ScoreSheetScreen />
           </Drawer.Section>
         </View>
       </DrawerContentScrollView>
-      <Drawer.Section style={styles.bottomDrawerSection}>
-        <DrawerItem
-          icon={({ color, size }) => (
-            <Icon
-              name="exit-to-app"
-              color={color}
-              size={size}
-            />
-          )}
-          label="Sign Out"
-          onPress={() => { signOut() }}
-        />
-      </Drawer.Section>
     </View>
   );
 }

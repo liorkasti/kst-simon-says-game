@@ -2,19 +2,18 @@ import React, { forwardRef, useEffect, useImperativeHandle, useState, } from 're
 import { View, Text, Alert, StyleSheet, Modal, Platform, TextInput, TouchableOpacity, Dimensions, } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { storeData, fetchData, addUser, setPrompt } from '../redux/actions';
+import { storeData } from '../redux/actions';
 
 const GameOver = ({ navigation }, ref) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [isDone, setIsDone] = useState(false);
   const [userName, setUserName] = useState('')
 
-  const { score, maxScore, topScores } = useSelector(state => state.reducers);
+  const { score } = useSelector(state => state.reducers);
   const dispatch = useDispatch();
 
   useImperativeHandle(ref, () => ({
     openModal: () => {
-      console.log('open modal');
       setModalVisible(true);
     },
   }));
@@ -30,9 +29,8 @@ const GameOver = ({ navigation }, ref) => {
 
   const onSubmit = () => {
     if (userName?.length != 0) {
-      dispatch(storeData(userName, score, () => dispatch(fetchData())));
+      dispatch(storeData(userName, score));
       setModalVisible(false);
-      //TODO: useNavigation or openDrawer
       navigation.openDrawer();
       // navigation.navigate('ScoreSheet');
     } else {

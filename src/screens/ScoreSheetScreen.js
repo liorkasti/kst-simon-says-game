@@ -1,5 +1,5 @@
-import React, { useEffect, useLayoutEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchScores } from '../redux/actions';
@@ -13,7 +13,6 @@ const ScoreSheetScreen = ({ navigation }) => {
   const title = "Scoreboard";
   const emptyList = "Loading...";
 
-  // const topScores = ref.get();
   useEffect(() => {
     dispatch(fetchScores());
   }, []);
