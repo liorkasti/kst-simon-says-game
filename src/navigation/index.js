@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Orientation from 'react-native-orientation-locker';
 
 import GamePlayScreen from '../screens/gamePlayScreen';
-import ScoreSheetScreen from '../screens/scoreSheetScreen';
+import ScoreSheetScreen from '../screens/ScoreSheetScreen';
 
 const App = () => {
   useEffect(() => {
