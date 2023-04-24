@@ -9,8 +9,9 @@ import ScoreSheetScreen from '../screens/ScoreSheetScreen';
 
 const App = () => {
   useEffect(() => {
+    console.disableYellowBox = true;
     setTimeout(() => { Orientation.lockToPortrait(); });
-  });
+  }, []);
 
   const Tab = createMaterialBottomTabNavigator();
   return (

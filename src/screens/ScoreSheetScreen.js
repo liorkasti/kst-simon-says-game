@@ -1,23 +1,28 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { fetchScores } from '../redux/actions';
 import Background from '../components/Background';
 
 const ScoreSheetScreen = ({ navigation }) => {
-  const state = useSelector((state) => state);
-  const { score, maxScore, topScores } = useSelector(state => state.reducers);
+  const { topScores } = useSelector(state => state.reducers);
 
   const dispatch = useDispatch();
 
   const title = "Scoreboard";
   const emptyList = "Loading...";
 
+  useEffect(() => {
+    dispatch(fetchScores());
+  }, []);
+
   const renderItem = item => {
     return (
       <View style={styles.itemRow}>
-        <Text style={styles.itemText}>{`Name: ${item.item.userName}`}</Text>
-        <Text style={styles.itemText}>{`Score: ${item.item.score}`}</Text>
+        <Text style={styles.itemNo}>{item.index + 1}</Text>
+        <Text style={styles.itemText}>{item.item.userName}</Text>
+        <Text style={styles.itemText}>{item.item.score}</Text>
       </View>
     )
   };
@@ -30,10 +35,18 @@ const ScoreSheetScreen = ({ navigation }) => {
     <Background>
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
+
+        <View style={styles.itemRow}>
+          <Text style={styles.itemNo}>{`#`}</Text>
+          <Text style={styles.itemText}>{`Name`}</Text>
+          <Text style={styles.itemText}>{`Score`}</Text>
+        </View>
+
         <FlatList
           keyExtractor={(index, item) => item}
           data={topScores}
           renderItem={renderItem}
+          scrollEnabled
           ListEmptyComponent={listEmptyComponent}
           ListFooterComponent={() => <View style={{ height: 100 }} />}
         />
@@ -67,12 +80,16 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   itemText: {
-    flexDirection: 'row',
     marginHorizontal: 10,
     fontSize: 16,
     flex: 1,
-    fontWeight: '500',
+    fontWeight: '900',
     textAlign: 'center',
+  },
+  itemNo: {
+    marginLeft: 10,
+    fontSize: 16,
+    fontWeight: '900',
   },
 });
 
