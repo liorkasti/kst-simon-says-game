@@ -14,7 +14,6 @@ const GameOver = ({ navigation }, ref) => {
 
   useImperativeHandle(ref, () => ({
     openModal: () => {
-      console.log('open modal');
       setModalVisible(true);
     },
   }));

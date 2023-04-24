@@ -1,5 +1,5 @@
 import React from 'react'
-import { ImageBackground, StyleSheet, Dimensions, useColorScheme } from 'react-native'
+import { ImageBackground, StyleSheet, useColorScheme } from 'react-native'
 import { Colors as Theme } from 'react-native/Libraries/NewAppScreen';
 
 import { HEIGHT, WIDTH } from '../constants/theme';
